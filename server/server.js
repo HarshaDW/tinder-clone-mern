@@ -1,14 +1,20 @@
 import express from "express";
 import mongoose from "mongoose";
 import cors from 'cors'
+import dotenv from 'dotenv'
 
 import Cards from './dbCards.js'
 
 // APP config
 const app = express();
 const port = process.env.PORT || 5000;
+
+dotenv.config()
+
+// Update local .env file with mongoDB configs
+// DB_USERNAME | DB_PASSWORD | DB_CLUSTER | DB_NAME
 const connection_url =
-  "mongodb+srv://root:1ring2rule@cluster0.o1jh6.mongodb.net/tinderdb?retryWrites=true&w=majority";
+  `mongodb+srv://${process.env.DB_USERNAME}:${process.env.DB_PASSWORD}@${process.env.DB_CLUSTER}/${process.env.DB_NAME}?retryWrites=true&w=majority`;
 
 // Middleware
 app.use(express.json())
